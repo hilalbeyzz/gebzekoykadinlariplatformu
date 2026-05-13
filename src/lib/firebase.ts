@@ -21,7 +21,6 @@ const auth = getAuth(app);
 // Bu, özellikle bazı ağlardaki (okul, iş yeri, VPN) bağlantı sorunlarını çözer.
 const db = initializeFirestore(app, {
   experimentalForceLongPolling: true,
-  useFetchStreams: false,
 });
 
 const storage = getStorage(app);
