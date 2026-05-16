@@ -25,9 +25,7 @@ export default function AdminLayout({
           <a href="/admin/products" className="block py-2 px-4 rounded hover:bg-primary/40 transition-colors">
             Ürünleri Yönet
           </a>
-          <a href="/admin/users" className="block py-2 px-4 rounded hover:bg-primary/40 transition-colors">
-            Üyeleri Yönet (Onayla/Engelle)
-          </a>
+
           <a href="/admin/forum" className="block py-2 px-4 rounded hover:bg-primary/40 transition-colors">
             Forum Gönderileri Onayı
           </a>

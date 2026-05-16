@@ -97,11 +97,8 @@ export default function Navbar() {
                   </div>
                 ) : (
                   <>
-                    <Link href="/login" className="text-white hover:text-secondary font-medium transition-colors">
+                    <Link href="/login" className="text-white hover:text-secondary font-medium transition-colors bg-white/10 px-4 py-2 rounded-full text-sm">
                       Giriş Yap
-                    </Link>
-                    <Link href="/register" className="bg-accent text-background-light px-6 py-2 rounded-full font-semibold hover:bg-accent-dark transition-colors">
-                      Kayıt Ol
                     </Link>
                   </>
                 )}
