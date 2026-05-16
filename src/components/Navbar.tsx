@@ -3,12 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useAuth } from '@/context/AuthContext';
-import { signOut } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
-
 export default function Navbar() {
-  const { user, userData, loading } = useAuth();
   const [siteContent, setSiteContent] = useState({
     logoUrl: "/logo.png",
     siteName: "Gebze Köy Kadınları Kültür Platformu"
@@ -36,14 +31,6 @@ export default function Navbar() {
     fetchSiteContent();
   }, []);
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      window.location.href = "/";
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
-  };
 
   // Split site name for styling (roughly in half or by first few words)
   const siteNameParts = siteContent.siteName.split(' ');
@@ -84,26 +71,7 @@ export default function Navbar() {
             <Link href="/forum" className="hover:text-secondary transition-colors font-medium">Forum</Link>
           </div>
           <div className="hidden md:flex items-center space-x-4">
-            {!loading && (
-              <>
-                {user ? (
-                    <div className="flex items-center space-x-4">
-                      <button
-                      onClick={handleLogout}
-                      className="bg-red-500/10 text-white border border-red-400/30 px-4 py-2 rounded-full font-semibold hover:bg-red-500 hover:text-white transition-all text-sm"
-                    >
-                      Çıkış
-                    </button>
-                  </div>
-                ) : (
-                  <>
-                    <Link href="/login" className="text-white hover:text-secondary font-medium transition-colors bg-white/10 px-4 py-2 rounded-full text-sm">
-                      Giriş Yap
-                    </Link>
-                  </>
-                )}
-              </>
-            )}
+            {/* Boş bırakıldı, admin girişi gizli URL'den yapılıyor */}
           </div>
           <div className="md:hidden flex items-center">
             {/* Mobile menu button placeholder */}

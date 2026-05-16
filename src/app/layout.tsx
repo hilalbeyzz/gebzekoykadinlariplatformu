@@ -3,7 +3,7 @@ import { Caveat, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { AuthProvider } from "@/context/AuthContext";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,11 +34,9 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable}`}>
       <body className="flex flex-col min-h-screen antialiased bg-background text-foreground">
-        <AuthProvider>
           <Navbar />
           <main className="flex-grow">{children}</main>
           <Footer />
-        </AuthProvider>
       </body>
     </html>
   );

@@ -1,10 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useAuth } from '@/context/AuthContext';
-
 export default function Footer() {
-  const { userData } = useAuth();
 
   return (
     <footer className="bg-background-dark text-foreground-dark py-12 border-t border-secondary/20">
@@ -36,12 +33,6 @@ export default function Footer() {
         </div>
         <div className="mt-8 pt-8 border-t border-secondary/20 flex flex-col md:flex-row justify-between items-center text-sm opacity-60">
           <p>&copy; {new Date().getFullYear()} Gebze Köy Kadınları Platformu. Tüm hakları saklıdır.</p>
-          
-          {userData?.role === 'admin' && (
-            <Link href="/admin" className="mt-4 md:mt-0 hover:text-secondary transition-colors underline underline-offset-4">
-              Yönetim Paneli
-            </Link>
-          )}
         </div>
       </div>
     </footer>

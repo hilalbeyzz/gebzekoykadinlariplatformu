@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import ProtectedRoute from '@/components/ProtectedRoute';
+
 import Link from 'next/link';
 
 interface Post {
@@ -67,7 +67,7 @@ export default function AdminPostsPage() {
   };
 
   return (
-    <ProtectedRoute requireAdmin={true}>
+    <>
       <div className="min-h-screen bg-background-light py-12 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
@@ -174,6 +174,6 @@ export default function AdminPostsPage() {
           </div>
         </div>
       </div>
-    </ProtectedRoute>
+    </>
   );
 }

@@ -2,7 +2,7 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
-import ProtectedRoute from "@/components/ProtectedRoute";
+
 import {
   DEFAULT_SHARES,
   SHARES_STORAGE_KEY,
@@ -104,7 +104,7 @@ export default function AdminSharesPage() {
   };
 
   return (
-    <ProtectedRoute requireAdmin={true}>
+    <>
       <div className="min-h-screen bg-background-light py-12 px-4">
         <div className="max-w-7xl mx-auto">
           <Link
@@ -297,6 +297,6 @@ export default function AdminSharesPage() {
           </div>
         </div>
       </div>
-    </ProtectedRoute>
+    </>
   );
 }
