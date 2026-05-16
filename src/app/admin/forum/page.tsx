@@ -7,6 +7,7 @@ import { collection, getDocs, doc, updateDoc, deleteDoc, query, orderBy } from "
 interface ForumPost {
   id: string;
   authorName: string;
+  location?: string;
   title: string;
   content: string;
   status: string;
@@ -82,7 +83,9 @@ export default function AdminForumPage() {
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h3 className="font-bold text-lg">{post.title}</h3>
-                    <p className="text-sm text-gray-500">Yazar: {post.authorName}</p>
+                    <p className="text-sm text-gray-500">
+                      Yazar: {post.authorName} {post.location && <span className="text-gray-400">({post.location})</span>}
+                    </p>
                   </div>
                   <div className="flex gap-2">
                     <button 
@@ -117,7 +120,9 @@ export default function AdminForumPage() {
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h3 className="font-bold text-lg">{post.title}</h3>
-                    <p className="text-sm text-gray-500">Yazar: {post.authorName}</p>
+                    <p className="text-sm text-gray-500">
+                      Yazar: {post.authorName} {post.location && <span className="text-gray-400">({post.location})</span>}
+                    </p>
                   </div>
                   <button 
                     onClick={() => handleReject(post.id)}
