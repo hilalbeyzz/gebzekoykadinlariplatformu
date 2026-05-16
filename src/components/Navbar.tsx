@@ -37,12 +37,12 @@ export default function Navbar() {
   }, []);
 
   const handleLogout = async () => {
-    // try {
-    //   await signOut(auth);
-    // } catch (error) {
-    //   console.error('Logout error:', error);
-    // }
-    alert("Mock modundayız. Gerçek çıkış işlemi kapalıdır.");
+    try {
+      await signOut(auth);
+      window.location.href = "/";
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
   // Split site name for styling (roughly in half or by first few words)

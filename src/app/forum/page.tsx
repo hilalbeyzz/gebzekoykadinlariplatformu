@@ -16,7 +16,7 @@ interface Post {
 const MOCK_POSTS: Post[] = [
   {
     id: 'mock-post-1',
-    title: 'Dernek Kermesimiz Hakkında',
+    title: 'Platform Kermesimiz Hakkında',
     content: 'Önümüzdeki hafta sonu düzenleyeceğimiz kermes için hazırlıklarımız devam ediyor. Katkıda bulunmak isteyen üyelerimiz benimle iletişime geçebilir.',
     authorName: 'Ayşe Yılmaz',
     createdAt: new Date().toISOString(),
@@ -35,14 +35,41 @@ const MOCK_POSTS: Post[] = [
 export default function ForumPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loadingPosts, setLoadingPosts] = useState(true);
-  const { user } = useAuth();
 
   useEffect(() => {
-    // Simulate network delay
-    setTimeout(() => {
-      setPosts(MOCK_POSTS);
-      setLoadingPosts(false);
-    }, 600);
+    async function fetchPosts() {
+      try {
+        const { collection, query, where, orderBy, getDocs } = await import("firebase/firestore");
+        const { db } = await import("@/lib/firebase");
+        
+        const q = query(
+          collection(db, "forum_posts"),
+          where("status", "==", "approved"),
+          orderBy("createdAt", "desc")
+        );
+        
+        const querySnapshot = await getDocs(q);
+        const fetchedPosts: Post[] = [];
+        
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          fetchedPosts.push({
+            id: doc.id,
+            ...data,
+            // Convert Firestore Timestamp to ISO string if it exists
+            createdAt: data.createdAt?.toDate ? data.createdAt.toDate().toISOString() : new Date().toISOString()
+          } as Post);
+        });
+        
+        setPosts(fetchedPosts);
+      } catch (error) {
+        console.error("Error fetching forum posts:", error);
+      } finally {
+        setLoadingPosts(false);
+      }
+    }
+
+    fetchPosts();
   }, []);
 
   return (
@@ -52,24 +79,18 @@ export default function ForumPage() {
           <div>
             <h1 className="text-3xl font-bold text-foreground-dark">Forum</h1>
             <p className="text-foreground-light/80 mt-2">
-              Dernek üyelerimizle iletişimde kalın, fikirlerinizi ve deneyimlerinizi paylaşın.
+              Platform üyelerimizle iletişimde kalın, fikirlerinizi ve deneyimlerinizi paylaşın.
             </p>
           </div>
-          {user ? (
-            <Link
-              href="/forum/create"
-              className="bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-primary-dark transition-colors shadow-md flex items-center gap-2"
-            >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
-              </svg>
-              Yeni Konu Aç
-            </Link>
-          ) : (
-            <div className="text-sm bg-card p-4 rounded-xl shadow-sm border border-border-warm">
-              Konu açmak için <Link href="/login" className="text-primary font-semibold hover:underline">Giriş Yapın</Link>
-            </div>
-          )}
+          <Link
+            href="/forum/create"
+            className="bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-primary-dark transition-colors shadow-md flex items-center gap-2"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+            </svg>
+            Yeni Konu Aç
+          </Link>
         </div>
 
         {loadingPosts ? (
@@ -127,14 +148,12 @@ export default function ForumPage() {
             </svg>
             <h3 className="text-xl font-bold text-foreground-dark mb-2">Henüz konu açılmamış</h3>
             <p className="text-foreground-light/80 mb-6">Forumda ilk konuyu siz açarak tartışmayı başlatın.</p>
-            {user && (
-              <Link
-                href="/forum/create"
-                className="inline-block bg-primary text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-dark transition-colors"
-              >
-                Yeni Konu Aç
-              </Link>
-            )}
+            <Link
+              href="/forum/create"
+              className="inline-block bg-primary text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-dark transition-colors"
+            >
+              Yeni Konu Aç
+            </Link>
           </div>
         )}
       </div>

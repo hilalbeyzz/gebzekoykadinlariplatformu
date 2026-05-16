@@ -11,7 +11,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4 text-secondary">Gebze Köy Kadınları Derneği</h3>
+            <h3 className="text-xl font-bold mb-4 text-secondary">Gebze Köy Kadınları Platformu</h3>
             <p className="text-sm opacity-80 leading-relaxed">
               Köy kadınlarının emeklerini değerlendirerek, üretimi destekliyor ve dayanışmayı büyütüyoruz.
             </p>
@@ -35,7 +35,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-secondary/20 flex flex-col md:flex-row justify-between items-center text-sm opacity-60">
-          <p>&copy; {new Date().getFullYear()} Gebze Köy Kadınları Derneği. Tüm hakları saklıdır.</p>
+          <p>&copy; {new Date().getFullYear()} Gebze Köy Kadınları Platformu. Tüm hakları saklıdır.</p>
           
           {userData?.role === 'admin' && (
             <Link href="/admin" className="mt-4 md:mt-0 hover:text-secondary transition-colors underline underline-offset-4">

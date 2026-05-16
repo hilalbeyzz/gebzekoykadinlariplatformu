@@ -1,50 +1,51 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useAuth } from '@/context/AuthContext';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function CreatePostPage() {
+  const [authorName, setAuthorName] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   
-  const { user, userData, loading: authLoading } = useAuth();
   const router = useRouter();
-
-  useEffect(() => {
-    if (!authLoading && !user) {
-      router.push('/login');
-    }
-  }, [user, authLoading, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user || !userData) return;
+    if (!authorName.trim() || !title.trim() || !content.trim()) return;
 
     setLoading(true);
-    // Mock save delay
-    setTimeout(() => {
+    
+    try {
+      const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
+      const { db } = await import("@/lib/firebase");
+      
+      await addDoc(collection(db, "forum_posts"), {
+        authorName,
+        title,
+        content,
+        status: "pending",
+        createdAt: serverTimestamp(),
+      });
+
       setSuccess(true);
+      setAuthorName('');
       setTitle('');
       setContent('');
-      setLoading(false);
       
       setTimeout(() => {
         router.push('/forum');
       }, 3000);
-    }, 1000);
+    } catch (error) {
+      console.error("Error adding post: ", error);
+      alert("Gönderi kaydedilirken bir hata oluştu.");
+    } finally {
+      setLoading(false);
+    }
   };
-
-  if (authLoading || !user) {
-    return (
-      <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-background-light py-12 px-4">
@@ -78,8 +79,23 @@ export default function CreatePostPage() {
             </Link>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="bg-card p-8 rounded-2xl shadow-sm border border-border-warm">
+          <form onSubmit={handleSubmit} className="bg-card p-8 rounded-2xl shadow-sm border border-border-warm relative">
             <div className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-foreground-dark mb-2">
+                  Adınız Soyadınız
+                </label>
+                <input
+                  type="text"
+                  required
+                  maxLength={50}
+                  className="w-full px-4 py-3 rounded-lg border border-border-warm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                  value={authorName}
+                  onChange={(e) => setAuthorName(e.target.value)}
+                  placeholder="İsminizi giriniz"
+                />
+              </div>
+
               <div>
                 <label className="block text-sm font-medium text-foreground-dark mb-2">
                   Konu Başlığı
@@ -118,7 +134,7 @@ export default function CreatePostPage() {
                 </Link>
                 <button
                   type="submit"
-                  disabled={loading || !title.trim() || !content.trim()}
+                  disabled={loading || !authorName.trim() || !title.trim() || !content.trim()}
                   className="bg-primary text-white px-8 py-3 rounded-full font-bold shadow-md hover:bg-primary-dark transition-colors disabled:opacity-70 flex items-center gap-2"
                 >
                   {loading && (

@@ -7,6 +7,7 @@ interface UserData {
   email: string | null;
   displayName: string | null;
   role: 'admin' | 'user';
+  isApproved: boolean;
 }
 
 interface AuthContextType {
@@ -29,17 +30,35 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // MOCK USER: Arayüzü inceleyebilmeniz için sizi otomatik olarak Admin yapıyoruz.
-    setTimeout(() => {
-      setUser({ uid: 'mock-uid-123', email: 'admin@gebzedernegi.com' });
-      setUserData({
-        uid: 'mock-uid-123',
-        email: 'admin@gebzedernegi.com',
-        displayName: 'Test Yöneticisi',
-        role: 'admin',
-      });
-      setLoading(false);
-    }, 500);
+    const { onAuthStateChanged } = require('firebase/auth');
+    const { auth, db } = require('@/lib/firebase');
+    const { doc, getDoc, onSnapshot } = require('firebase/firestore');
+
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser: any) => {
+      setUser(currentUser);
+      
+      if (currentUser) {
+        // Fetch user data from Firestore
+        const userDocRef = doc(db, 'users', currentUser.uid);
+        
+        // Use onSnapshot for real-time updates (e.g. if an admin approves while user is online)
+        const unsubDoc = onSnapshot(userDocRef, (docSnap: any) => {
+          if (docSnap.exists()) {
+            setUserData(docSnap.data() as UserData);
+          } else {
+            setUserData(null);
+          }
+          setLoading(false);
+        });
+
+        return () => unsubDoc();
+      } else {
+        setUserData(null);
+        setLoading(false);
+      }
+    });
+
+    return () => unsubscribe();
   }, []);
 
   return (

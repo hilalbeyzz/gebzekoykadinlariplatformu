@@ -16,7 +16,7 @@ interface Post {
 const MOCK_POSTS: Record<string, Post> = {
   'mock-post-1': {
     id: 'mock-post-1',
-    title: 'Dernek Kermesimiz Hakkında',
+    title: 'Platform Kermesimiz Hakkında',
     content: 'Önümüzdeki hafta sonu düzenleyeceğimiz kermes için hazırlıklarımız devam ediyor. Katkıda bulunmak isteyen üyelerimiz benimle iletişime geçebilir.',
     authorName: 'Ayşe Yılmaz',
     createdAt: new Date().toISOString(),

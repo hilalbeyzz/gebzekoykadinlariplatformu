@@ -44,7 +44,7 @@ export default function SupportPage() {
                 </button>
               </div>
               <p className="mt-4 text-sm text-gray-600">
-                <span className="font-bold">Alıcı:</span> Gebze Köy Kadınları Kültür ve Dayanışma Derneği
+                <span className="font-bold">Alıcı:</span> Gebze Köy Kadınları Kültür ve Dayanışma Platformu
               </p>
             </div>
 

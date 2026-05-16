@@ -35,6 +35,7 @@ export default function RegisterPage() {
         email: user.email,
         displayName: name,
         role: 'user',
+        isApproved: false,
         createdAt: new Date().toISOString()
       });
 

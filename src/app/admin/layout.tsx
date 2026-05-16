@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 export const metadata: Metadata = {
   title: "Yönetim Paneli | Gebze Köy Kadınları Kültür Platformu",
@@ -10,7 +11,8 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <ProtectedRoute requireAdmin={true}>
+      <div className="min-h-screen bg-gray-50 flex">
       <div className="w-64 bg-primary-dark text-white p-6 shadow-xl hidden md:block">
         <h2 className="text-xl font-bold mb-8 tracking-wider">YÖNETİM PANELI</h2>
         <nav className="space-y-4">
@@ -23,6 +25,12 @@ export default function AdminLayout({
           <a href="/admin/products" className="block py-2 px-4 rounded hover:bg-primary/40 transition-colors">
             Ürünleri Yönet
           </a>
+          <a href="/admin/users" className="block py-2 px-4 rounded hover:bg-primary/40 transition-colors">
+            Üyeleri Yönet (Onayla/Engelle)
+          </a>
+          <a href="/admin/forum" className="block py-2 px-4 rounded hover:bg-primary/40 transition-colors">
+            Forum Gönderileri Onayı
+          </a>
           <a href="/admin/content" className="block py-2 px-4 rounded hover:bg-primary/40 transition-colors">
             Site İçeriğini Düzenle
           </a>
@@ -34,6 +42,6 @@ export default function AdminLayout({
       <div className="flex-1 p-8 md:p-12 overflow-y-auto">
         {children}
       </div>
-    </div>
+    </ProtectedRoute>
   );
 }

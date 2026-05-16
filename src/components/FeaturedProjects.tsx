@@ -78,7 +78,7 @@ export default function FeaturedProjects() {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground-light mb-4">Öne Çıkan Çalışmalarımız</h2>
           <div className="w-24 h-1 bg-primary mx-auto rounded-full mb-6"></div>
-          <p className="text-foreground-light/80 max-w-2xl mx-auto">Derneğimiz çatısı altında yürüttüğümüz eğitim, üretim ve dayanışma projeleri ile köylerimiz kalkınıyor.</p>
+          <p className="text-foreground-light/80 max-w-2xl mx-auto">Platformumuz çatısı altında yürüttüğümüz eğitim, üretim ve dayanışma projeleri ile köylerimiz kalkınıyor.</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

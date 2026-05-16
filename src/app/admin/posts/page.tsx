@@ -17,14 +17,14 @@ const MOCK_ADMIN_POSTS: Post[] = [
   {
     id: 'mock-post-3',
     title: 'Yeni Bir Fikrim Var',
-    content: 'Derneğimizin daha çok kişiye ulaşması için sosyal medyada haftalık canlı yayınlar yapalım.',
+    content: 'Platformumuzun daha çok kişiye ulaşması için sosyal medyada haftalık canlı yayınlar yapalım.',
     authorName: 'Mehmet Yılmaz',
     createdAt: new Date().toISOString(),
     status: 'pending',
   },
   {
     id: 'mock-post-1',
-    title: 'Dernek Kermesimiz Hakkında',
+    title: 'Platform Kermesimiz Hakkında',
     content: 'Önümüzdeki hafta sonu düzenleyeceğimiz kermes için hazırlıklarımız devam ediyor. Katkıda bulunmak isteyen üyelerimiz benimle iletişime geçebilir.',
     authorName: 'Ayşe Yılmaz',
     createdAt: new Date(Date.now() - 3600000).toISOString(),

@@ -14,6 +14,8 @@ interface SiteContent {
   ctaDescription: string;
   logoUrl?: string;
   siteName: string;
+  aboutText?: string;
+  aboutImageUrl?: string;
 }
 
 const DEFAULT_CONTENT: SiteContent = {
@@ -26,7 +28,9 @@ const DEFAULT_CONTENT: SiteContent = {
   ctaTitle: "Siz de Ailemize Katılın",
   ctaDescription: "Bize gönüllü olarak destek verebilir, çalışmalarımıza sponsor olabilir veya ürünlerimizden satın alarak kadın emeğine doğrudan katkıda bulunabilirsiniz.",
   siteName: "Gebze Köy Kadınları Kültür Platformu",
-  logoUrl: "/logo.png"
+  logoUrl: "/logo.png",
+  aboutText: "Gebze Köy Kadınları Kültür Platformu olarak, köylerimizde yaşayan kadınların sosyal ve ekonomik hayatta daha aktif rol almalarını sağlıyoruz.",
+  aboutImageUrl: ""
 };
 
 export default function ContentManagement() {
@@ -34,6 +38,7 @@ export default function ContentManagement() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [logoFile, setLogoFile] = useState<File | null>(null);
+  const [aboutFile, setAboutFile] = useState<File | null>(null);
 
   useEffect(() => {
     async function fetchContent() {
@@ -59,23 +64,33 @@ export default function ContentManagement() {
     setSaving(true);
     try {
       let currentLogoUrl = content.logoUrl;
+      let currentAboutImageUrl = content.aboutImageUrl;
+
+      const { ref, uploadBytes, getDownloadURL } = await import("firebase/storage");
+      const { storage } = await import("@/lib/firebase");
 
       if (logoFile) {
-        const { ref, uploadBytes, getDownloadURL } = await import("firebase/storage");
-        const { storage } = await import("@/lib/firebase");
         const logoRef = ref(storage, `site/logo_${Date.now()}`);
         const snapshot = await uploadBytes(logoRef, logoFile);
         currentLogoUrl = await getDownloadURL(snapshot.ref);
       }
 
+      if (aboutFile) {
+        const aboutRef = ref(storage, `site/about_${Date.now()}`);
+        const snapshot = await uploadBytes(aboutRef, aboutFile);
+        currentAboutImageUrl = await getDownloadURL(snapshot.ref);
+      }
+
       const { doc, setDoc } = await import("firebase/firestore");
       await setDoc(doc(db, "settings", "siteContent"), {
         ...content,
-        logoUrl: currentLogoUrl
+        logoUrl: currentLogoUrl,
+        aboutImageUrl: currentAboutImageUrl
       });
       
-      setContent(prev => ({ ...prev, logoUrl: currentLogoUrl }));
+      setContent(prev => ({ ...prev, logoUrl: currentLogoUrl, aboutImageUrl: currentAboutImageUrl }));
       setLogoFile(null);
+      setAboutFile(null);
       alert("Site içeriği başarıyla güncellendi!");
     } catch (err: any) {
       console.error(err);
@@ -190,6 +205,41 @@ export default function ContentManagement() {
                 className="w-full p-2 border rounded"
                 rows={3}
               />
+            </div>
+          </div>
+        </section>
+
+        <section className="p-6 bg-gray-50 rounded-xl border border-gray-200">
+          <h2 className="text-xl font-bold mb-4 text-primary-dark">Hakkımızda Sayfası İçeriği</h2>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Hakkımızda Yazısı</label>
+              <textarea 
+                value={content.aboutText}
+                onChange={(e) => setContent({...content, aboutText: e.target.value})}
+                className="w-full p-2 border rounded"
+                rows={10}
+                placeholder="Hakkımızda sayfasında fotoğrafın altında görünecek yazı..."
+              />
+            </div>
+            <div className="flex items-center gap-6">
+              <div className="flex-1">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Hakkımızda Fotoğrafı Değiştir</label>
+                <input 
+                  type="file" 
+                  onChange={(e) => setAboutFile(e.target.files?.[0] || null)}
+                  className="w-full text-sm bg-white p-2 border rounded"
+                  accept="image/*"
+                />
+              </div>
+              {content.aboutImageUrl && (
+                <div className="text-center">
+                   <p className="text-xs text-gray-500 mb-1">Mevcut Görsel</p>
+                   <div className="h-16 w-24 rounded border bg-white flex items-center justify-center overflow-hidden">
+                      <img src={content.aboutImageUrl} alt="Hakkımızda" className="max-h-full max-w-full object-cover" />
+                   </div>
+                </div>
+              )}
             </div>
           </div>
         </section>

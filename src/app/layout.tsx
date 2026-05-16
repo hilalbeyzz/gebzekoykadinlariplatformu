@@ -22,8 +22,8 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "Gebze Köy Kadınları Derneği",
-  description: "Gebze Köy Kadınları Derneği resmi web sitesi. Doğal ürünler, atölyeler ve dayanışma.",
+  title: "Gebze Köy Kadınları Platformu",
+  description: "Gebze Köy Kadınları Platformu resmi web sitesi. Doğal ürünler, atölyeler ve dayanışma.",
 };
 
 export default function RootLayout({
