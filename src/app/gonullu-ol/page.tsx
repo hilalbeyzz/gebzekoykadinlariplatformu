@@ -6,14 +6,27 @@ export default function VolunteerPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      const formData = new FormData(e.target as HTMLFormElement);
+      const data = Object.fromEntries(formData.entries());
+      
+      const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
+      const { db } = await import("@/lib/firebase");
+      
+      await addDoc(collection(db, "volunteer_submissions"), {
+        ...data,
+        createdAt: serverTimestamp(),
+      });
       setSubmitted(true);
-    }, 1500);
+    } catch (err) {
+      console.error("Error saving volunteer form:", err);
+      alert("Başvurunuz gönderilirken bir hata oluştu.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -52,6 +65,7 @@ export default function VolunteerPage() {
                 <label className="block text-sm font-bold text-gray-700 mb-2">Ad Soyad</label>
                 <input 
                   required
+                  name="name"
                   type="text" 
                   className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary focus:bg-white outline-none transition-all"
                   placeholder="Ahmet Yılmaz"
@@ -61,6 +75,7 @@ export default function VolunteerPage() {
                 <label className="block text-sm font-bold text-gray-700 mb-2">E-Posta Adresi</label>
                 <input 
                   required
+                  name="email"
                   type="email" 
                   className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary focus:bg-white outline-none transition-all"
                   placeholder="ahmet@example.com"
@@ -73,6 +88,7 @@ export default function VolunteerPage() {
                 <label className="block text-sm font-bold text-gray-700 mb-2">Telefon Numarası</label>
                 <input 
                   required
+                  name="phone"
                   type="tel" 
                   className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary focus:bg-white outline-none transition-all"
                   placeholder="05xx xxx xx xx"
@@ -82,6 +98,7 @@ export default function VolunteerPage() {
                 <label className="block text-sm font-bold text-gray-700 mb-2">Meslek / Uzmanlık</label>
                 <input 
                   type="text" 
+                  name="profession"
                   className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary focus:bg-white outline-none transition-all"
                   placeholder="Örn: Eğitmen, Yazılımcı, Çiftçi"
                 />
@@ -100,7 +117,7 @@ export default function VolunteerPage() {
                   "Diğer"
                 ].map((item, i) => (
                   <label key={i} className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-secondary/20 transition-colors">
-                    <input type="checkbox" className="w-5 h-5 accent-primary" />
+                    <input type="checkbox" name={`support_${i}`} value={item} className="w-5 h-5 accent-primary" />
                     <span className="text-sm font-medium text-gray-700">{item}</span>
                   </label>
                 ))}
@@ -111,6 +128,7 @@ export default function VolunteerPage() {
               <label className="block text-sm font-bold text-gray-700 mb-2">Kendinizden Kısaca Bahseder Misiniz?</label>
               <textarea 
                 rows={4}
+                name="about"
                 className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary focus:bg-white outline-none transition-all"
                 placeholder="Deneyimleriniz ve bize katabilecekleriniz..."
               ></textarea>

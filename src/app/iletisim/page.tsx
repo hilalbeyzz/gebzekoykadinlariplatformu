@@ -6,13 +6,27 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      const formData = new FormData(e.target as HTMLFormElement);
+      const data = Object.fromEntries(formData.entries());
+      
+      const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
+      const { db } = await import("@/lib/firebase");
+      
+      await addDoc(collection(db, "contact_submissions"), {
+        ...data,
+        createdAt: serverTimestamp(),
+      });
       setSubmitted(true);
-    }, 1200);
+    } catch (err) {
+      console.error("Error saving contact form:", err);
+      alert("Mesajınız gönderilirken bir hata oluştu.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -93,20 +107,20 @@ export default function ContactPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-bold text-gray-700 mb-2">Ad Soyad</label>
-                      <input required type="text" className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary focus:bg-white outline-none transition-all" />
+                      <input required name="name" type="text" className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary focus:bg-white outline-none transition-all" />
                     </div>
                     <div>
                       <label className="block text-sm font-bold text-gray-700 mb-2">E-Posta</label>
-                      <input required type="email" className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary focus:bg-white outline-none transition-all" />
+                      <input required name="email" type="email" className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary focus:bg-white outline-none transition-all" />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-bold text-gray-700 mb-2">Konu</label>
-                    <input required type="text" className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary focus:bg-white outline-none transition-all" />
+                    <input required name="subject" type="text" className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary focus:bg-white outline-none transition-all" />
                   </div>
                   <div>
                     <label className="block text-sm font-bold text-gray-700 mb-2">Mesajınız</label>
-                    <textarea required rows={6} className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary focus:bg-white outline-none transition-all"></textarea>
+                    <textarea required name="message" rows={6} className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-primary focus:bg-white outline-none transition-all"></textarea>
                   </div>
                   <button 
                     disabled={loading}

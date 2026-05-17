@@ -22,8 +22,17 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://gebzekoykadinlari.com"), // Use appropriate domain
   title: "Gebze Köy Kadınları Platformu",
   description: "Gebze Köy Kadınları Platformu resmi web sitesi. Doğal ürünler, atölyeler ve dayanışma.",
+  openGraph: {
+    title: "Gebze Köy Kadınları Platformu",
+    description: "Gebze Köy Kadınları Platformu resmi web sitesi. Doğal ürünler, atölyeler ve dayanışma.",
+    url: "https://gebzekoykadinlari.com",
+    siteName: "Gebze Köy Kadınları Platformu",
+    locale: "tr_TR",
+    type: "website",
+  },
   icons: {
     icon: '/logo.png',
   },

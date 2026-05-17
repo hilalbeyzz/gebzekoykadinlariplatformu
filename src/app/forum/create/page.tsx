@@ -6,7 +6,6 @@ import Link from 'next/link';
 
 export default function CreatePostPage() {
   const [authorName, setAuthorName] = useState('');
-  const [location, setLocation] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
@@ -16,7 +15,7 @@ export default function CreatePostPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!authorName.trim() || !location.trim() || !title.trim() || !content.trim()) return;
+    if (!authorName.trim() || !title.trim() || !content.trim()) return;
 
     setLoading(true);
     
@@ -26,7 +25,6 @@ export default function CreatePostPage() {
       
       await addDoc(collection(db, "forum_posts"), {
         authorName,
-        location,
         title,
         content,
         status: "pending",
@@ -35,7 +33,6 @@ export default function CreatePostPage() {
 
       setSuccess(true);
       setAuthorName('');
-      setLocation('');
       setTitle('');
       setContent('');
       
@@ -84,7 +81,7 @@ export default function CreatePostPage() {
         ) : (
           <form onSubmit={handleSubmit} className="bg-white/5 p-8 rounded-2xl shadow-sm border border-secondary/20 relative backdrop-blur-sm">
             <div className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-foreground-dark mb-2">
                     İsim Soyisim
@@ -99,21 +96,6 @@ export default function CreatePostPage() {
                     placeholder="Adınız Soyadınız"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-foreground-dark mb-2">
-                    Paylaşılacak Yer (Köy/Şehir vb.)
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    maxLength={50}
-                    className="w-full px-4 py-3 rounded-lg bg-background-dark/50 border border-secondary/20 text-foreground-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-foreground-dark/30"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    placeholder="Örn: Kadıllı Köyü"
-                  />
-                </div>
-              </div>
 
               <div>
                 <label className="block text-sm font-medium text-foreground-dark mb-2">
@@ -153,7 +135,7 @@ export default function CreatePostPage() {
                 </Link>
                 <button
                   type="submit"
-                  disabled={loading || !authorName.trim() || !location.trim() || !title.trim() || !content.trim()}
+                  disabled={loading || !authorName.trim() || !title.trim() || !content.trim()}
                   className="bg-primary text-white px-8 py-3 rounded-full font-bold shadow-md hover:bg-primary-dark transition-colors disabled:opacity-70 flex items-center gap-2"
                 >
                   {loading && (
@@ -165,6 +147,7 @@ export default function CreatePostPage() {
                   Gönder
                 </button>
               </div>
+            </div>
             </div>
           </form>
         )}

@@ -23,8 +23,7 @@ export default function ProjectsPage() {
       try {
         const { collection, getDocs, query, orderBy, where } = await import("firebase/firestore");
         const postsRef = collection(db, "posts");
-        // In a real scenario, you might have a 'category' or just use 'featured' vs others
-        const q = query(postsRef, orderBy("createdAt", "desc"));
+        const q = query(postsRef, where("type", "==", "featured"), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
         
         const fetched: Post[] = [];
