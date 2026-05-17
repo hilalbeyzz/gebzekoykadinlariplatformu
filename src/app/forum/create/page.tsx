@@ -51,7 +51,7 @@ export default function CreatePostPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background-light py-12 px-4">
+    <div className="min-h-screen bg-background-dark py-12 px-4">
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
           <Link href="/forum" className="text-primary font-medium hover:underline flex items-center gap-2 mb-4 w-fit">
@@ -61,7 +61,7 @@ export default function CreatePostPage() {
             Foruma Dön
           </Link>
           <h1 className="text-3xl font-bold text-foreground-dark">Yeni Konu Aç</h1>
-          <p className="text-foreground-light/80 mt-2">
+          <p className="text-foreground-dark/80 mt-2">
             Gönderiniz yöneticiler tarafından onaylandıktan sonra forumda yayınlanacaktır.
           </p>
         </div>
@@ -82,7 +82,7 @@ export default function CreatePostPage() {
             </Link>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="bg-card p-8 rounded-2xl shadow-sm border border-border-warm relative">
+          <form onSubmit={handleSubmit} className="bg-white/5 p-8 rounded-2xl shadow-sm border border-secondary/20 relative backdrop-blur-sm">
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -93,7 +93,7 @@ export default function CreatePostPage() {
                     type="text"
                     required
                     maxLength={50}
-                    className="w-full px-4 py-3 rounded-lg border border-border-warm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 rounded-lg bg-background-dark/50 border border-secondary/20 text-foreground-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-foreground-dark/30"
                     value={authorName}
                     onChange={(e) => setAuthorName(e.target.value)}
                     placeholder="Adınız Soyadınız"
@@ -107,7 +107,7 @@ export default function CreatePostPage() {
                     type="text"
                     required
                     maxLength={50}
-                    className="w-full px-4 py-3 rounded-lg border border-border-warm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 rounded-lg bg-background-dark/50 border border-secondary/20 text-foreground-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-foreground-dark/30"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     placeholder="Örn: Kadıllı Köyü"
@@ -123,7 +123,7 @@ export default function CreatePostPage() {
                   type="text"
                   required
                   maxLength={100}
-                  className="w-full px-4 py-3 rounded-lg border border-border-warm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 rounded-lg bg-background-dark/50 border border-secondary/20 text-foreground-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-foreground-dark/30"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Kısaca ne hakkında yazacaksınız?"
@@ -137,7 +137,7 @@ export default function CreatePostPage() {
                 <textarea
                   required
                   rows={8}
-                  className="w-full px-4 py-3 rounded-lg border border-border-warm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                  className="w-full px-4 py-3 rounded-lg bg-background-dark/50 border border-secondary/20 text-foreground-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none placeholder:text-foreground-dark/30"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                   placeholder="Düşüncelerinizi buraya yazın..."
@@ -147,7 +147,7 @@ export default function CreatePostPage() {
               <div className="flex justify-end gap-4 pt-4">
                 <Link
                   href="/forum"
-                  className="px-6 py-3 rounded-full font-semibold text-foreground-light hover:bg-secondary/20 transition-colors"
+                  className="px-6 py-3 rounded-full font-semibold text-foreground-dark/80 hover:bg-secondary/20 hover:text-foreground-dark transition-colors"
                 >
                   İptal
                 </Link>

@@ -74,12 +74,12 @@ export default function ForumPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background-light py-12">
+    <div className="min-h-screen bg-background-dark py-12">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-foreground-dark">Forum</h1>
-            <p className="text-foreground-light/80 mt-2">
+            <p className="text-foreground-dark/80 mt-2">
               Platform üyelerimizle iletişimde kalın, fikirlerinizi ve deneyimlerinizi paylaşın.
             </p>
           </div>
@@ -104,17 +104,17 @@ export default function ForumPage() {
               <Link 
                 href={`/forum/${post.id}`} 
                 key={post.id}
-                className="block bg-card p-6 rounded-2xl shadow-sm border border-border-warm hover:shadow-md hover:border-primary/30 transition-all group"
+                className="block bg-white/5 p-6 rounded-2xl shadow-sm border border-secondary/20 hover:shadow-md hover:border-primary/50 transition-all group backdrop-blur-sm"
               >
                 <div className="flex justify-between items-start">
                   <div>
                     <h2 className="text-xl font-bold text-foreground-dark group-hover:text-primary transition-colors mb-2">
                       {post.title}
                     </h2>
-                    <p className="text-foreground-light/70 text-sm line-clamp-2 mb-4">
+                    <p className="text-foreground-dark/70 text-sm line-clamp-2 mb-4">
                       {post.content}
                     </p>
-                    <div className="flex items-center text-xs text-foreground-light/60 font-medium space-x-4">
+                    <div className="flex items-center text-xs text-foreground-dark/60 font-medium space-x-4">
                       <span className="flex items-center gap-1">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -142,7 +142,7 @@ export default function ForumPage() {
                       </span>
                     </div>
                   </div>
-                  <div className="hidden sm:flex shrink-0 ml-4 items-center justify-center bg-secondary/20 w-12 h-12 rounded-full text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                  <div className="hidden sm:flex shrink-0 ml-4 items-center justify-center bg-primary/20 w-12 h-12 rounded-full text-primary group-hover:bg-primary group-hover:text-foreground-dark transition-colors">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                     </svg>
@@ -152,12 +152,12 @@ export default function ForumPage() {
             ))}
           </div>
         ) : (
-          <div className="bg-card p-12 rounded-2xl shadow-sm border border-border-warm text-center">
+          <div className="bg-white/5 p-12 rounded-2xl shadow-sm border border-secondary/20 text-center backdrop-blur-sm">
             <svg className="w-16 h-16 text-secondary/70 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
             <h3 className="text-xl font-bold text-foreground-dark mb-2">Henüz konu açılmamış</h3>
-            <p className="text-foreground-light/80 mb-6">Forumda ilk konuyu siz açarak tartışmayı başlatın.</p>
+            <p className="text-foreground-dark/80 mb-6">Forumda ilk konuyu siz açarak tartışmayı başlatın.</p>
             <Link
               href="/forum/create"
               className="inline-block bg-primary text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-dark transition-colors"
