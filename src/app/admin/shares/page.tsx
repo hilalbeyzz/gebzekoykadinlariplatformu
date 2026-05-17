@@ -118,7 +118,7 @@ export default function AdminSharesPage() {
           </Link>
 
           <div className="mb-10">
-            <h1 className="text-3xl font-bold text-foreground-dark">
+            <h1 className="text-3xl font-bold text-foreground-light">
               Paylaşım Yönetimi
             </h1>
             <p className="text-foreground-light/80 mt-2">
@@ -132,13 +132,13 @@ export default function AdminSharesPage() {
               onSubmit={handleSubmit}
               className="bg-card border border-border-warm rounded-2xl p-6 shadow-sm h-fit"
             >
-              <h2 className="text-xl font-bold text-foreground-dark mb-6">
+              <h2 className="text-xl font-bold text-foreground-light mb-6">
                 {editingId ? "Paylaşımı Düzenle" : "Yeni Paylaşım Ekle"}
               </h2>
 
               <div className="space-y-5">
                 <div>
-                  <label className="block text-sm font-medium text-foreground-dark mb-2">
+                  <label className="block text-sm font-medium text-foreground-light mb-2">
                     Başlık
                   </label>
                   <input
@@ -152,7 +152,7 @@ export default function AdminSharesPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-foreground-dark mb-2">
+                    <label className="block text-sm font-medium text-foreground-light mb-2">
                       Kategori
                     </label>
                     <select
@@ -170,7 +170,7 @@ export default function AdminSharesPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-foreground-dark mb-2">
+                    <label className="block text-sm font-medium text-foreground-light mb-2">
                       Durum
                     </label>
                     <select
@@ -187,7 +187,7 @@ export default function AdminSharesPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground-dark mb-2">
+                  <label className="block text-sm font-medium text-foreground-light mb-2">
                     Kısa Özet
                   </label>
                   <textarea
@@ -201,7 +201,7 @@ export default function AdminSharesPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground-dark mb-2">
+                  <label className="block text-sm font-medium text-foreground-light mb-2">
                     Paylaşım Metni
                   </label>
                   <textarea
@@ -236,12 +236,12 @@ export default function AdminSharesPage() {
 
             <div>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
-                <h2 className="text-xl font-bold text-foreground-dark">
+                <h2 className="text-xl font-bold text-foreground-light">
                   Mevcut Paylaşımlar
                 </h2>
                 <button
                   onClick={handleReset}
-                  className="self-start rounded-full border border-border-warm bg-card px-4 py-2 text-sm font-semibold text-foreground-dark hover:bg-background-light transition-colors"
+                  className="self-start rounded-full border border-border-warm bg-card px-4 py-2 text-sm font-semibold text-foreground-light hover:bg-background-light transition-colors"
                 >
                   Varsayılana Döndür
                 </button>
