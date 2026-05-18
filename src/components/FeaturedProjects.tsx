@@ -23,15 +23,19 @@ export default function FeaturedProjects() {
       try {
         const { collection, getDocs, query, orderBy, limit, where } = await import("firebase/firestore");
         const postsRef = collection(db, "posts");
-        // Fetch posts where type is 'featured'
-        const q = query(postsRef, where("type", "==", "featured"), orderBy("createdAt", "desc"), limit(3));
+        // Fetch all posts and filter in memory to avoid composite index error
+        const q = query(postsRef, orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
         
         const fetched: Post[] = [];
         querySnapshot.forEach((doc) => {
-          fetched.push({ id: doc.id, ...doc.data() } as Post);
+          const data = doc.data();
+          if (data.type === "featured") {
+            fetched.push({ id: doc.id, ...data } as Post);
+          }
         });
-        setProjects(fetched);
+        // Limit to 3 manually
+        setProjects(fetched.slice(0, 3));
       } catch (error) {
         console.error("Error fetching featured projects: ", error);
       } finally {

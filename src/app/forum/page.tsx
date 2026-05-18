@@ -44,7 +44,6 @@ export default function ForumPage() {
         
         const q = query(
           collection(db, "forum_posts"),
-          where("status", "==", "approved"),
           orderBy("createdAt", "desc")
         );
         
@@ -53,12 +52,15 @@ export default function ForumPage() {
         
         querySnapshot.forEach((doc) => {
           const data = doc.data();
-          fetchedPosts.push({
-            id: doc.id,
-            ...data,
-            // Convert Firestore Timestamp to ISO string if it exists
-            createdAt: data.createdAt?.toDate ? data.createdAt.toDate().toISOString() : new Date().toISOString()
-          } as Post);
+          // Firebase index hatası almamak için memory'de filtreliyoruz
+          if (data.status === "approved") {
+            fetchedPosts.push({
+              id: doc.id,
+              ...data,
+              // Convert Firestore Timestamp to ISO string if it exists
+              createdAt: data.createdAt?.toDate ? data.createdAt.toDate().toISOString() : new Date().toISOString()
+            } as Post);
+          }
         });
         
         setPosts(fetchedPosts);

@@ -23,12 +23,15 @@ export default function ProjectsPage() {
       try {
         const { collection, getDocs, query, orderBy, where } = await import("firebase/firestore");
         const postsRef = collection(db, "posts");
-        const q = query(postsRef, where("type", "==", "featured"), orderBy("createdAt", "desc"));
+        const q = query(postsRef, orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
         
         const fetched: Post[] = [];
         querySnapshot.forEach((doc) => {
-          fetched.push({ id: doc.id, ...doc.data() } as Post);
+          const data = doc.data();
+          if (data.type === "featured") {
+            fetched.push({ id: doc.id, ...data } as Post);
+          }
         });
         setProjects(fetched);
       } catch (error) {
