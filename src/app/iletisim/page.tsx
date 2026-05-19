@@ -59,34 +59,30 @@ export default function ContactPage() {
 
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-secondary/30 rounded-2xl flex items-center justify-center text-primary-dark shrink-0 text-xl">
-                    📞
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900">Telefon</h3>
-                    <p className="text-gray-600">+90 (555) 123 45 67</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-secondary/30 rounded-2xl flex items-center justify-center text-primary-dark shrink-0 text-xl">
                     ✉️
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900">E-Posta</h3>
-                    <p className="text-gray-600">iletisim@gebzekadinlari.org</p>
+                    <p className="text-gray-600">umran.yavas41@gmail.com</p>
                   </div>
                 </div>
               </div>
 
               <div className="mt-12">
-                <h3 className="font-bold text-gray-900 mb-4">Sosyal Medya</h3>
-                <div className="flex gap-4">
-                  {['Facebook', 'Instagram', 'Twitter'].map((social) => (
-                    <div key={social} className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-colors cursor-pointer">
-                      <span className="sr-only">{social}</span>
-                      <div className="w-5 h-5 bg-current opacity-20 rounded-sm"></div>
-                    </div>
-                  ))}
+                <h3 className="font-bold text-gray-900 mb-6">Sosyal Medya Hesaplarımız</h3>
+                <div className="space-y-4">
+                  <a href="https://instagram.com/umranyavastepecik" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-gray-600 hover:text-primary transition-colors">
+                    <span className="text-xl">📸</span> Instagram: umranyavastepecik
+                  </a>
+                  <a href="https://instagram.com/gebzelikoykadinlari" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-gray-600 hover:text-primary transition-colors">
+                    <span className="text-xl">📸</span> Instagram: gebzelikoykadinlari
+                  </a>
+                  <a href="https://www.facebook.com/groups/gebzekoyleri" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-gray-600 hover:text-primary transition-colors">
+                    <span className="text-xl">👥</span> Facebook: Gebze Köyleri ve Duraklı Divanı Kültür Sayfası
+                  </a>
+                  <a href="https://www.facebook.com/search/top?q=%C3%9Cmran%20Yava%C5%9F%20Tepecik" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-gray-600 hover:text-primary transition-colors">
+                    <span className="text-xl">👥</span> Facebook: Ümran Yavaş Tepecik
+                  </a>
                 </div>
               </div>
             </div>

@@ -18,7 +18,7 @@ export default function LoginPage() {
     try {
       const result = await loginAdmin(password);
       if (result.success) {
-        router.push('/admin');
+        router.push('/yonetim');
         router.refresh();
       } else {
         setError(result.error || 'Giriş yapılamadı.');

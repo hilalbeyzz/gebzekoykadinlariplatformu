@@ -24,10 +24,16 @@ export default function Footer() {
           </div>
           <div>
             <h4 className="font-semibold mb-4 text-accent">İletişim</h4>
-            <ul className="space-y-2 text-sm opacity-80">
+            <ul className="space-y-2 text-sm opacity-80 mb-6">
               <li>📍 Gebze, Kocaeli</li>
-              <li>✉️ iletisim@gebzekadinlari.org</li>
-              <li>📞 +90 (555) 123 45 67</li>
+              <li>✉️ umran.yavas41@gmail.com</li>
+            </ul>
+            <h4 className="font-semibold mb-4 text-accent">Sosyal Medya</h4>
+            <ul className="space-y-3 text-sm opacity-80">
+              <li><a href="https://instagram.com/umranyavastepecik" target="_blank" rel="noreferrer" className="hover:text-secondary transition-colors block">📸 IG: umranyavastepecik</a></li>
+              <li><a href="https://instagram.com/gebzelikoykadinlari" target="_blank" rel="noreferrer" className="hover:text-secondary transition-colors block">📸 IG: gebzelikoykadinlari</a></li>
+              <li><a href="https://www.facebook.com/groups/gebzekoyleri" target="_blank" rel="noreferrer" className="hover:text-secondary transition-colors block">👥 FB: Gebze Köyleri ve Duraklı Divanı</a></li>
+              <li><a href="https://www.facebook.com/search/top?q=%C3%9Cmran%20Yava%C5%9F%20Tepecik" target="_blank" rel="noreferrer" className="hover:text-secondary transition-colors block">👥 FB: Ümran Yavaş Tepecik</a></li>
             </ul>
           </div>
         </div>

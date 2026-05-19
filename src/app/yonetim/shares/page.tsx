@@ -108,7 +108,7 @@ export default function AdminSharesPage() {
       <div className="min-h-screen bg-background-light py-12 px-4">
         <div className="max-w-7xl mx-auto">
           <Link
-            href="/admin"
+            href="/yonetim"
             className="text-primary font-medium hover:underline flex items-center gap-2 mb-4 w-fit"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

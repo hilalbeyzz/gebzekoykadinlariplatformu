@@ -72,7 +72,7 @@ export default function AdminPostsPage() {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
             <div>
-              <Link href="/admin" className="text-primary font-medium hover:underline flex items-center gap-2 mb-4 w-fit">
+              <Link href="/yonetim" className="text-primary font-medium hover:underline flex items-center gap-2 mb-4 w-fit">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
