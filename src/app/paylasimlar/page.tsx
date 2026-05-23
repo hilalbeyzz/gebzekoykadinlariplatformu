@@ -15,6 +15,7 @@ interface Post {
 export default function SharesPage() {
   const [shares, setShares] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeImageUrl, setActiveImageUrl] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchShares() {
@@ -76,8 +77,21 @@ export default function SharesPage() {
                 className="bg-card border border-border-warm rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col md:flex-row gap-8"
               >
                 {share.imageUrl && (
-                  <div className="w-full md:w-1/3 relative h-48 md:h-auto rounded-xl overflow-hidden shrink-0">
-                    <Image src={share.imageUrl} alt={share.title} fill className="object-cover" />
+                  <div 
+                    className="w-full md:w-1/3 relative h-48 md:h-auto rounded-xl overflow-hidden shrink-0 cursor-pointer group"
+                    onClick={() => setActiveImageUrl(share.imageUrl || null)}
+                  >
+                    <Image 
+                      src={share.imageUrl} 
+                      alt={share.title} 
+                      fill 
+                      className="object-cover transition-transform duration-300 group-hover:scale-105" 
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span className="bg-white/90 text-primary-dark font-bold text-xs px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                        🔍 Büyüt
+                      </span>
+                    </div>
                   </div>
                 )}
                 <div className="flex-1">
@@ -105,6 +119,36 @@ export default function SharesPage() {
           )}
         </div>
       </section>
+
+      {/* Lightbox Modal */}
+      {activeImageUrl && (
+        <div 
+          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm cursor-zoom-out"
+          onClick={() => setActiveImageUrl(null)}
+        >
+          <div className="relative max-w-5xl max-h-[85vh] w-full h-full flex items-center justify-center">
+            <button 
+              className="absolute -top-12 sm:top-4 right-4 text-white text-4xl font-bold bg-black/40 hover:bg-black/75 rounded-full w-12 h-12 flex items-center justify-center transition-colors z-50 cursor-pointer border border-white/20"
+              onClick={(e) => {
+                e.stopPropagation();
+                setActiveImageUrl(null);
+              }}
+            >
+              &times;
+            </button>
+            <div 
+              className="relative max-w-full max-h-[80vh] rounded-2xl overflow-hidden p-2 flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img 
+                src={activeImageUrl} 
+                alt="Büyük Görsel" 
+                className="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl border-4 border-white/10" 
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -80,14 +80,14 @@ export default function AdminForumPage() {
           <div className="space-y-4 mb-12">
             {pendingPosts.map(post => (
               <div key={post.id} className="bg-amber-50 p-6 rounded-xl border border-amber-200">
-                <div className="flex justify-between items-start mb-4">
-                  <div>
+                <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-4">
+                  <div className="flex-1">
                     <h3 className="font-bold text-lg">{post.title}</h3>
                     <p className="text-sm text-gray-500">
                       Yazar: {post.authorName} {post.location && <span className="text-gray-400">({post.location})</span>}
                     </p>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 w-full sm:w-auto justify-end shrink-0">
                     <button 
                       onClick={() => handleApprove(post.id)}
                       className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-green-600 transition-colors"
@@ -117,7 +117,7 @@ export default function AdminForumPage() {
           <div className="space-y-4">
             {approvedPosts.map(post => (
               <div key={post.id} className="bg-gray-50 p-6 rounded-xl border border-gray-200">
-                <div className="flex justify-between items-start mb-4">
+                <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-4">
                   <div>
                     <h3 className="font-bold text-lg">{post.title}</h3>
                     <p className="text-sm text-gray-500">
@@ -126,7 +126,7 @@ export default function AdminForumPage() {
                   </div>
                   <button 
                     onClick={() => handleReject(post.id)}
-                    className="text-red-500 text-sm font-bold hover:underline"
+                    className="text-red-500 text-sm font-bold hover:underline self-end sm:self-start"
                   >
                     Gönderiyi Sil
                   </button>

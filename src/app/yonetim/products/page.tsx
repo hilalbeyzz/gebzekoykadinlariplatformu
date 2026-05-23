@@ -186,12 +186,12 @@ export default function ManageProducts() {
         ) : (
           <div className="grid gap-4">
             {products.map((product) => (
-              <div key={product.id} className="p-4 border rounded-xl flex justify-between items-center bg-gray-50">
+              <div key={product.id} className="p-4 border rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-gray-50">
                 <div>
                   <h3 className="font-bold text-lg">{product.name}</h3>
                   <p className="text-sm text-gray-600">{product.producer} - {product.price}</p>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 self-end sm:self-auto">
                   <button 
                     onClick={() => setEditingProduct(product)}
                     className="bg-primary/10 text-primary-dark px-3 py-1 rounded hover:bg-primary/20 transition-colors text-sm"

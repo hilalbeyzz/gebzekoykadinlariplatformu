@@ -197,14 +197,14 @@ export default function ManagePosts() {
               )}
               
               <div className="flex-1">
-                <div className="flex justify-between items-start">
-                  <div>
+                <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
+                  <div className="flex-1">
                     <h3 className="text-xl font-bold text-gray-900">{post.title}</h3>
                     <span className={`inline-block px-2 py-1 mt-1 text-xs font-semibold rounded-md ${post.type === 'featured' ? 'bg-primary/20 text-primary-dark' : 'bg-gray-200 text-gray-700'}`}>
                       {post.type === 'featured' ? 'Öne Çıkan Çalışma' : 'Genel Paylaşım'}
                     </span>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 self-end sm:self-start">
                     <button 
                       onClick={() => setEditingPost(post)}
                       className="text-primary-dark hover:text-primary font-medium text-sm px-3 py-1 bg-primary/10 hover:bg-primary/20 rounded transition-colors"
