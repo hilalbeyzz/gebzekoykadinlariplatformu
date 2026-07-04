@@ -130,7 +130,7 @@ export default function ManagePosts() {
               type="text" 
               value={editingPost.title}
               onChange={(e) => setEditingPost({...editingPost, title: e.target.value})}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-gray-900 bg-white"
               required
             />
           </div>
@@ -139,7 +139,7 @@ export default function ManagePosts() {
             <textarea 
               value={editingPost.description}
               onChange={(e) => setEditingPost({...editingPost, description: e.target.value})}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-gray-900 bg-white"
               rows={4}
               required
             />
@@ -149,7 +149,7 @@ export default function ManagePosts() {
             <select 
               value={editingPost.type}
               onChange={(e) => setEditingPost({...editingPost, type: e.target.value})}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-gray-900 bg-white"
             >
               <option value="normal">Normal</option>
               <option value="featured">Öne Çıkan</option>

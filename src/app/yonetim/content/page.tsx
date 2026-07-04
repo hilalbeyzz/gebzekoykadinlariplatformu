@@ -150,7 +150,7 @@ export default function ContentManagement() {
                 type="text" 
                 value={content.heroTitle}
                 onChange={(e) => setContent({...content, heroTitle: e.target.value})}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded text-gray-900 bg-white"
               />
             </div>
             <div>
@@ -158,7 +158,7 @@ export default function ContentManagement() {
               <textarea 
                 value={content.heroDescription}
                 onChange={(e) => setContent({...content, heroDescription: e.target.value})}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded text-gray-900 bg-white"
                 rows={3}
               />
             </div>
@@ -169,7 +169,7 @@ export default function ContentManagement() {
                   type="text" 
                   value={content.heroSupportBtn}
                   onChange={(e) => setContent({...content, heroSupportBtn: e.target.value})}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border rounded text-gray-900 bg-white"
                 />
               </div>
               <div>
@@ -178,7 +178,7 @@ export default function ContentManagement() {
                   type="text" 
                   value={content.heroProjectsBtn}
                   onChange={(e) => setContent({...content, heroProjectsBtn: e.target.value})}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border rounded text-gray-900 bg-white"
                 />
               </div>
             </div>
@@ -194,7 +194,7 @@ export default function ContentManagement() {
                 type="text" 
                 value={content.productSectionTitle}
                 onChange={(e) => setContent({...content, productSectionTitle: e.target.value})}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded text-gray-900 bg-white"
               />
             </div>
             <div>
@@ -202,7 +202,7 @@ export default function ContentManagement() {
               <textarea 
                 value={content.productSectionDesc}
                 onChange={(e) => setContent({...content, productSectionDesc: e.target.value})}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded text-gray-900 bg-white"
                 rows={3}
               />
             </div>
@@ -217,7 +217,7 @@ export default function ContentManagement() {
               <textarea 
                 value={content.aboutText}
                 onChange={(e) => setContent({...content, aboutText: e.target.value})}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded text-gray-900 bg-white"
                 rows={10}
                 placeholder="Hakkımızda sayfasında fotoğrafın altında görünecek yazı..."
               />
@@ -253,7 +253,7 @@ export default function ContentManagement() {
                 type="text" 
                 value={content.ctaTitle}
                 onChange={(e) => setContent({...content, ctaTitle: e.target.value})}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded text-gray-900 bg-white"
               />
             </div>
             <div>
@@ -261,7 +261,7 @@ export default function ContentManagement() {
               <textarea 
                 value={content.ctaDescription}
                 onChange={(e) => setContent({...content, ctaDescription: e.target.value})}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded text-gray-900 bg-white"
                 rows={3}
               />
             </div>

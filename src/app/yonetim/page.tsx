@@ -87,7 +87,7 @@ export default function AdminPage() {
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow text-gray-900 bg-white placeholder:text-gray-400"
             placeholder="Etkinlik veya duyuru başlığı"
           />
         </div>
@@ -101,7 +101,7 @@ export default function AdminPage() {
             rows={5}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow text-gray-900 bg-white placeholder:text-gray-400"
             placeholder="Paylaşım içeriğini buraya yazınız..."
           ></textarea>
         </div>
@@ -114,7 +114,7 @@ export default function AdminPage() {
             id="postType"
             value={postType}
             onChange={(e) => setPostType(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow bg-white"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow text-gray-900 bg-white"
           >
             <option value="normal">Sadece "Son Paylaşımlar" kısmında</option>
             <option value="featured">"Öne Çıkan Çalışmalarımız" kısmında (Ana sayfada üstte)</option>

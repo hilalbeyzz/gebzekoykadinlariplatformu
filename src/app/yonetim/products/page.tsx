@@ -109,7 +109,7 @@ export default function ManageProducts() {
               type="text" 
               value={editingProduct ? editingProduct.name : newName}
               onChange={(e) => editingProduct ? setEditingProduct({...editingProduct, name: e.target.value}) : setNewName(e.target.value)}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-gray-900 bg-white"
               required
             />
           </div>
@@ -119,7 +119,7 @@ export default function ManageProducts() {
               type="text" 
               value={editingProduct ? editingProduct.producer : newProducer}
               onChange={(e) => editingProduct ? setEditingProduct({...editingProduct, producer: e.target.value}) : setNewProducer(e.target.value)}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-gray-900 bg-white"
               required
             />
           </div>
@@ -131,7 +131,7 @@ export default function ManageProducts() {
               type="text" 
               value={editingProduct ? editingProduct.price : newPrice}
               onChange={(e) => editingProduct ? setEditingProduct({...editingProduct, price: e.target.value}) : setNewPrice(e.target.value)}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-gray-900 bg-white"
               required
             />
           </div>
@@ -140,7 +140,7 @@ export default function ManageProducts() {
             <select 
               value={editingProduct ? editingProduct.tone : newTone}
               onChange={(e) => editingProduct ? setEditingProduct({...editingProduct, tone: e.target.value as any}) : setNewTone(e.target.value as any)}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-gray-900 bg-white"
             >
               <option value="olive">Zeytin Yeşili</option>
               <option value="earth">Toprak</option>
@@ -154,7 +154,7 @@ export default function ManageProducts() {
           <textarea 
             value={editingProduct ? editingProduct.description : newDescription}
             onChange={(e) => editingProduct ? setEditingProduct({...editingProduct, description: e.target.value}) : setNewDescription(e.target.value)}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-gray-900 bg-white"
             rows={3}
             required
           />
