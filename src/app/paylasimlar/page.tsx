@@ -78,17 +78,17 @@ export default function SharesPage() {
               >
                 {share.imageUrl && (
                   <div 
-                    className="w-full md:w-1/3 relative h-48 md:h-auto rounded-xl overflow-hidden shrink-0 cursor-pointer group"
+                    className="w-full md:w-1/3 relative h-64 md:min-h-[250px] bg-black/5 rounded-xl overflow-hidden shrink-0 cursor-pointer group"
                     onClick={() => setActiveImageUrl(share.imageUrl || null)}
                   >
                     <Image 
                       src={share.imageUrl} 
                       alt={share.title} 
                       fill 
-                      className="object-cover transition-transform duration-300 group-hover:scale-105" 
+                      className="object-contain transition-transform duration-300 group-hover:scale-105 p-2" 
                     />
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <span className="bg-white/90 text-primary-dark font-bold text-xs px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                    <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span className="bg-white/95 text-primary-dark font-bold text-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
                         🔍 Büyüt
                       </span>
                     </div>

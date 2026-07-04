@@ -15,6 +15,7 @@ interface Post {
 export default function LatestShares() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeImageUrl, setActiveImageUrl] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchPosts() {
@@ -69,8 +70,16 @@ export default function LatestShares() {
           {posts.map((post) => (
             <div key={post.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group border border-gray-100">
               {post.imageUrl ? (
-                <div className="relative h-48 w-full">
-                  <Image src={post.imageUrl} alt={post.title} fill className="object-cover" />
+                <div 
+                  className="relative h-56 w-full bg-black/5 cursor-pointer group"
+                  onClick={() => setActiveImageUrl(post.imageUrl || null)}
+                >
+                  <Image src={post.imageUrl} alt={post.title} fill className="object-contain p-2 transition-transform duration-300 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="bg-white/95 text-primary-dark font-bold text-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+                      🔍 Büyüt
+                    </span>
+                  </div>
                 </div>
               ) : (
                 <div className="h-48 bg-secondary/30 relative overflow-hidden flex items-center justify-center">
@@ -85,6 +94,36 @@ export default function LatestShares() {
           ))}
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      {activeImageUrl && (
+        <div 
+          className="fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-4 backdrop-blur-sm cursor-zoom-out"
+          onClick={() => setActiveImageUrl(null)}
+        >
+          <div className="relative max-w-5xl max-h-[85vh] w-full h-full flex items-center justify-center">
+            <button 
+              className="absolute -top-12 sm:top-4 right-4 text-white text-4xl font-bold bg-black/40 hover:bg-black/75 rounded-full w-12 h-12 flex items-center justify-center transition-colors z-50 cursor-pointer border border-white/20"
+              onClick={(e) => {
+                e.stopPropagation();
+                setActiveImageUrl(null);
+              }}
+            >
+              &times;
+            </button>
+            <div 
+              className="relative max-w-full max-h-[80vh] rounded-2xl overflow-hidden p-2 flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img 
+                src={activeImageUrl} 
+                alt="Büyük Görsel" 
+                className="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl border-4 border-white/10" 
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
