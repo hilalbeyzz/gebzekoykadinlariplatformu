@@ -19,7 +19,7 @@ export default function Footer() {
               <li><Link href="/hakkimizda" className="hover:text-secondary transition-colors">Hakkımızda</Link></li>
               <li><Link href="/projeler" className="hover:text-secondary transition-colors">Projelerimiz</Link></li>
               <li><Link href="/urunler" className="hover:text-secondary transition-colors">El Emeği Ürünler</Link></li>
-              <li><Link href="/destek-ol" className="hover:text-secondary transition-colors">Gönüllü Ol & Bağış Yap</Link></li>
+              <li><Link href="/gonullu-ol" className="hover:text-secondary transition-colors">Gönüllü Ol</Link></li>
             </ul>
           </div>
           <div>

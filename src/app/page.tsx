@@ -52,7 +52,7 @@ export default function Home() {
             {content.heroDescription}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/destek-ol" className="bg-accent text-background-light px-8 py-4 rounded-full font-bold text-lg hover:bg-accent-dark transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            <Link href="/gonullu-ol" className="bg-accent text-background-light px-8 py-4 rounded-full font-bold text-lg hover:bg-accent-dark transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
               {content.heroSupportBtn}
             </Link>
             <Link href="/projeler" className="bg-transparent border-2 border-background-light text-background-light px-8 py-4 rounded-full font-bold text-lg hover:bg-background-light hover:text-primary transition-all">
