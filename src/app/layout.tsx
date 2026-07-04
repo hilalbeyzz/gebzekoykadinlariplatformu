@@ -32,9 +32,24 @@ export const metadata: Metadata = {
     siteName: "Gebze Köy Kadınları Platformu",
     locale: "tr_TR",
     type: "website",
+    images: [
+      {
+        url: '/logo.png',
+        width: 800,
+        height: 600,
+        alt: 'Gebze Köy Kadınları Platformu Logosu',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gebze Köy Kadınları Platformu',
+    description: 'Gebze Köy Kadınları Platformu resmi web sitesi. Doğal ürünler, atölyeler ve dayanışma.',
+    images: ['/logo.png'],
   },
   icons: {
     icon: '/logo.png',
+    apple: '/logo.png',
   },
 };
 
