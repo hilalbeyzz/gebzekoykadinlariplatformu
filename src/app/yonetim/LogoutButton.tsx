@@ -2,11 +2,18 @@
 
 import { useRouter } from 'next/navigation';
 import { logoutAdmin } from '@/app/actions/auth';
+import { signOut } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
 
 export default function LogoutButton() {
   const router = useRouter();
 
   const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      console.error("Firebase logout error:", err);
+    }
     await logoutAdmin();
     router.push('/');
     router.refresh();

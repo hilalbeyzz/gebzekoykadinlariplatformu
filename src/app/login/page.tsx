@@ -3,8 +3,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { loginAdmin } from '@/app/actions/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
 
 export default function LoginPage() {
+  const [email, setEmail] = useState('umran.yavas41@gmail.com');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -16,7 +19,12 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
+      // 1. Authenticate with Firebase Client SDK
+      await signInWithEmailAndPassword(auth, email, password);
+
+      // 2. Set Next.js HTTP-only cookie for route protection
       const result = await loginAdmin(password);
+      
       if (result.success) {
         router.push('/yonetim');
         router.refresh();
@@ -24,7 +32,12 @@ export default function LoginPage() {
         setError(result.error || 'Giriş yapılamadı.');
       }
     } catch (err: any) {
-      setError('Bir hata oluştu. Lütfen tekrar deneyin.');
+      if (err.code === 'auth/invalid-credential' || err.code === 'auth/wrong-password') {
+        setError('E-posta veya şifre hatalı.');
+      } else {
+        setError('Bir hata oluştu. Lütfen tekrar deneyin.');
+        console.error(err);
+      }
     } finally {
       setLoading(false);
     }
@@ -42,6 +55,20 @@ export default function LoginPage() {
         )}
 
         <form onSubmit={handleLogin} className="space-y-6">
+          <div>
+            <label className="block text-sm font-medium text-foreground-light mb-2">
+              E-posta
+            </label>
+            <input
+              type="email"
+              required
+              className="w-full px-4 py-3 rounded-lg border border-border-warm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="admin@example.com"
+            />
+          </div>
+
           <div>
             <label className="block text-sm font-medium text-foreground-light mb-2">
               Yönetici Şifresi
